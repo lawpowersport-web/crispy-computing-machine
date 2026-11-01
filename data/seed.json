@@ -1,0 +1,1205 @@
+{
+  "settings": {
+    "storeName": "BassBox Enclosures",
+    "tagline": "Vehicle-specific underseat subwoofer enclosures, built to order.",
+    "email": "sales@example.com",
+    "phone": "(555) 012-3456",
+    "address": "123 Industrial Pkwy, Your City, ST 00000",
+    "hours": "Mon–Fri 9am–6pm",
+    "currency": "USD",
+    "taxRate": 0.07,
+    "taxState": "",
+    "shippingFlat": 25,
+    "freeShippingOver": 500,
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "youtube": "",
+      "tiktok": ""
+    }
+  },
+  "categories": [
+    {
+      "id": "underseat",
+      "name": "Underseat Boxes",
+      "description": "Vehicle-specific boxes that fit under your rear seat"
+    },
+    {
+      "id": "universal",
+      "name": "Universal Boxes",
+      "description": "Fits most vehicles"
+    },
+    {
+      "id": "ported",
+      "name": "Ported Boxes",
+      "description": "Maximum output, tuned ports"
+    },
+    {
+      "id": "accessories",
+      "name": "Accessories",
+      "description": "Amp racks, terminals and more"
+    }
+  ],
+  "plugins": [
+    {
+      "id": "fitment-finder",
+      "name": "Vehicle Fitment Finder",
+      "icon": "🚙",
+      "description": "Year / Make / Model search on the home page and shop filter.",
+      "enabled": true,
+      "config": {}
+    },
+    {
+      "id": "reviews",
+      "name": "Product Reviews & Star Ratings",
+      "icon": "⭐",
+      "description": "Customers leave star reviews; you moderate them in Admin → Reviews.",
+      "enabled": true,
+      "config": {
+        "autoApprove": false
+      }
+    },
+    {
+      "id": "live-chat",
+      "name": "Live Chat Widget",
+      "icon": "💬",
+      "description": "Floating chat button with quick answers; messages land in Admin → Messages.",
+      "enabled": true,
+      "config": {
+        "greeting": "Hi! Need help finding the right box for your truck?",
+        "whatsapp": ""
+      }
+    },
+    {
+      "id": "newsletter-popup",
+      "name": "Newsletter Popup",
+      "icon": "📧",
+      "description": "Email capture popup with a discount code.",
+      "enabled": true,
+      "config": {
+        "delaySeconds": 8,
+        "headline": "Get 10% off your first box",
+        "couponCode": "BASS10"
+      }
+    },
+    {
+      "id": "announcement-bar",
+      "name": "Announcement Bar",
+      "icon": "📣",
+      "description": "Top-of-page promo banner.",
+      "enabled": true,
+      "config": {
+        "text": "FREE SHIPPING on orders over $500 • Built to order in 3-5 business days"
+      }
+    },
+    {
+      "id": "coupons",
+      "name": "Coupons & Discounts",
+      "icon": "🏷️",
+      "description": "Discount codes at cart and checkout.",
+      "enabled": true,
+      "config": {}
+    },
+    {
+      "id": "wishlist",
+      "name": "Wishlist",
+      "icon": "❤️",
+      "description": "Customers save products to a wishlist.",
+      "enabled": true,
+      "config": {}
+    },
+    {
+      "id": "recently-viewed",
+      "name": "Recently Viewed Products",
+      "icon": "🕘",
+      "description": "Shows recently viewed boxes on product pages.",
+      "enabled": true,
+      "config": {}
+    },
+    {
+      "id": "financing",
+      "name": "Pay-Later Messaging",
+      "icon": "💳",
+      "description": "Shows \"4 interest-free payments\" messaging on product pages.",
+      "enabled": true,
+      "config": {
+        "installments": 4
+      }
+    },
+    {
+      "id": "cookie-consent",
+      "name": "Cookie Consent Banner",
+      "icon": "🍪",
+      "description": "GDPR / CCPA cookie notice.",
+      "enabled": true,
+      "config": {
+        "text": "We use cookies to improve your shopping experience."
+      }
+    },
+    {
+      "id": "google-merchant",
+      "name": "Google Merchant Center Feed",
+      "icon": "🛍️",
+      "description": "Product feed at /feed/google-merchant.xml for Google Shopping.",
+      "enabled": true,
+      "config": {
+        "brand": "BassBox Enclosures"
+      }
+    },
+    {
+      "id": "seo-schema",
+      "name": "SEO & Structured Data",
+      "icon": "🔎",
+      "description": "Product JSON-LD schema, sitemap.xml and robots.txt.",
+      "enabled": true,
+      "config": {}
+    },
+    {
+      "id": "analytics",
+      "name": "Google Analytics (GA4)",
+      "icon": "📈",
+      "description": "Adds the GA4 tag when a Measurement ID is set.",
+      "enabled": false,
+      "config": {
+        "measurementId": ""
+      }
+    },
+    {
+      "id": "facebook-pixel",
+      "name": "Meta Pixel",
+      "icon": "📘",
+      "description": "Adds the Meta Pixel when a Pixel ID is set.",
+      "enabled": false,
+      "config": {
+        "pixelId": ""
+      }
+    },
+    {
+      "id": "back-to-top",
+      "name": "Back To Top Button",
+      "icon": "⬆️",
+      "description": "Floating scroll-to-top button.",
+      "enabled": true,
+      "config": {}
+    }
+  ],
+  "products": [
+    {
+      "id": "p_001",
+      "slug": "chevy-silverado-gmc-sierra-crew-cab-underseat-box-2019-2026",
+      "sku": "BB-SIL-CC19",
+      "name": "Chevy Silverado / GMC Sierra Crew Cab Underseat Box (2019-2026)",
+      "category": "underseat",
+      "price": 329,
+      "salePrice": 299,
+      "stock": 25,
+      "active": true,
+      "featured": true,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Low-profile sealed underseat enclosure built specifically for 2019+ Silverado and Sierra Crew Cab trucks. Slides under the rear seat and keeps your factory storage-free floor flat.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.75 cu ft",
+        "Mounting depth": "5.5 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Chevrolet",
+          "model": "Silverado 1500",
+          "yearFrom": 2019,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        },
+        {
+          "make": "GMC",
+          "model": "Sierra 1500",
+          "yearFrom": 2019,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        },
+        {
+          "make": "Chevrolet",
+          "model": "Silverado 2500HD",
+          "yearFrom": 2020,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        }
+      ],
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "p_002",
+      "slug": "chevy-silverado-gmc-sierra-crew-cab-underseat-box-2014-2018",
+      "sku": "BB-SIL-CC14",
+      "name": "Chevy Silverado / GMC Sierra Crew Cab Underseat Box (2014-2018)",
+      "category": "underseat",
+      "price": 299,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Sealed underseat box for 2014-2018 Silverado and Sierra Crew Cab. Designed around the factory seat brackets for an OEM look.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.70 cu ft",
+        "Mounting depth": "5.25 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Chevrolet",
+          "model": "Silverado 1500",
+          "yearFrom": 2014,
+          "yearTo": 2018,
+          "cab": "Crew Cab"
+        },
+        {
+          "make": "GMC",
+          "model": "Sierra 1500",
+          "yearFrom": 2014,
+          "yearTo": 2018,
+          "cab": "Crew Cab"
+        }
+      ],
+      "createdAt": "2026-01-02T00:00:00.000Z"
+    },
+    {
+      "id": "p_003",
+      "slug": "ford-f-150-supercrew-underseat-box-2015-2026",
+      "sku": "BB-F150-SC15",
+      "name": "Ford F-150 SuperCrew Underseat Box (2015-2026)",
+      "category": "underseat",
+      "price": 349,
+      "salePrice": 319,
+      "stock": 25,
+      "active": true,
+      "featured": true,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Dual-chamber underseat enclosure for the Ford F-150 SuperCrew. Fits under the rear 60/40 seat with the seat fully functional.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.80 cu ft",
+        "Mounting depth": "6 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Ford",
+          "model": "F-150",
+          "yearFrom": 2015,
+          "yearTo": 2026,
+          "cab": "SuperCrew"
+        },
+        {
+          "make": "Ford",
+          "model": "F-250 Super Duty",
+          "yearFrom": 2017,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        }
+      ],
+      "createdAt": "2026-01-03T00:00:00.000Z"
+    },
+    {
+      "id": "p_004",
+      "slug": "ford-f-150-supercab-downfire-box-2015-2026",
+      "sku": "BB-F150-SCAB",
+      "name": "Ford F-150 SuperCab Downfire Box (2015-2026)",
+      "category": "underseat",
+      "price": 289,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Downfiring enclosure for the smaller SuperCab rear area. Maximum output with minimal space used.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.60 cu ft",
+        "Mounting depth": "5 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          8,
+          10
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Ford",
+          "model": "F-150",
+          "yearFrom": 2015,
+          "yearTo": 2026,
+          "cab": "SuperCab"
+        }
+      ],
+      "createdAt": "2026-01-04T00:00:00.000Z"
+    },
+    {
+      "id": "p_005",
+      "slug": "ram-1500-crew-cab-underseat-box-2019-2026",
+      "sku": "BB-RAM-CC19",
+      "name": "Ram 1500 Crew Cab Underseat Box (2019-2026)",
+      "category": "underseat",
+      "price": 339,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": true,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Built for the new-body Ram 1500 Crew Cab. Fits beneath the rear seat while keeping the under-seat storage bins usable on one side.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.78 cu ft",
+        "Mounting depth": "5.75 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Ram",
+          "model": "1500",
+          "yearFrom": 2019,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        },
+        {
+          "make": "Ram",
+          "model": "2500",
+          "yearFrom": 2019,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        }
+      ],
+      "createdAt": "2026-01-05T00:00:00.000Z"
+    },
+    {
+      "id": "p_006",
+      "slug": "dodge-ram-quad-cab-underseat-box-2009-2018",
+      "sku": "BB-RAM-QC09",
+      "name": "Dodge Ram Quad Cab Underseat Box (2009-2018)",
+      "category": "underseat",
+      "price": 279,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Classic Ram Quad Cab enclosure. Simple bolt-in install with deep, punchy bass.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.65 cu ft",
+        "Mounting depth": "5 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Ram",
+          "model": "1500",
+          "yearFrom": 2009,
+          "yearTo": 2018,
+          "cab": "Quad Cab"
+        }
+      ],
+      "createdAt": "2026-01-06T00:00:00.000Z"
+    },
+    {
+      "id": "p_007",
+      "slug": "toyota-tacoma-double-cab-underseat-box-2016-2023",
+      "sku": "BB-TAC-DC16",
+      "name": "Toyota Tacoma Double Cab Underseat Box (2016-2023)",
+      "category": "underseat",
+      "price": 309,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": true,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Compact sealed enclosure for the Tacoma Double Cab. Driver-side and passenger-side versions available as single or dual.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.55 cu ft",
+        "Mounting depth": "4.75 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          8,
+          10
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Toyota",
+          "model": "Tacoma",
+          "yearFrom": 2016,
+          "yearTo": 2023,
+          "cab": "Double Cab"
+        }
+      ],
+      "createdAt": "2026-01-07T00:00:00.000Z"
+    },
+    {
+      "id": "p_008",
+      "slug": "toyota-tundra-crewmax-ported-underseat-box-2014-2021",
+      "sku": "BB-TUN-CM14",
+      "name": "Toyota Tundra CrewMax Ported Underseat Box (2014-2021)",
+      "category": "underseat",
+      "price": 369,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "ported",
+      "description": "Ported underseat design for the spacious Tundra CrewMax. Tuned to 34 Hz for loud, low bass.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "1.10 cu ft",
+        "Port tuning": "34 Hz",
+        "Mounting depth": "7 in",
+        "Material": "5/8\" MDF"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Toyota",
+          "model": "Tundra",
+          "yearFrom": 2014,
+          "yearTo": 2021,
+          "cab": "CrewMax"
+        }
+      ],
+      "createdAt": "2026-01-08T00:00:00.000Z"
+    },
+    {
+      "id": "p_009",
+      "slug": "jeep-gladiator-underseat-box-2020-2026",
+      "sku": "BB-JEEP-GL20",
+      "name": "Jeep Gladiator Underseat Box (2020-2026)",
+      "category": "underseat",
+      "price": 319,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Fits under the Gladiator rear seat using the factory lockable storage location.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.60 cu ft",
+        "Mounting depth": "5 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Jeep",
+          "model": "Gladiator",
+          "yearFrom": 2020,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        },
+        {
+          "make": "Jeep",
+          "model": "Wrangler Unlimited",
+          "yearFrom": 2018,
+          "yearTo": 2026,
+          "cab": "4-Door"
+        }
+      ],
+      "createdAt": "2026-01-09T00:00:00.000Z"
+    },
+    {
+      "id": "p_010",
+      "slug": "nissan-frontier-crew-cab-underseat-box-2022-2026",
+      "sku": "BB-NIS-FR22",
+      "name": "Nissan Frontier Crew Cab Underseat Box (2022-2026)",
+      "category": "underseat",
+      "price": 299,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": false,
+      "enclosureType": "sealed",
+      "description": "Low-profile enclosure for the new Frontier Crew Cab.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.55 cu ft",
+        "Mounting depth": "4.75 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          8,
+          10
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Carpeted amp rack",
+            "price": 45
+          },
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          },
+          {
+            "label": "Custom logo embroidery",
+            "price": 60
+          }
+        ]
+      },
+      "fitment": [
+        {
+          "make": "Nissan",
+          "model": "Frontier",
+          "yearFrom": 2022,
+          "yearTo": 2026,
+          "cab": "Crew Cab"
+        }
+      ],
+      "createdAt": "2026-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "p_011",
+      "slug": "universal-slim-sealed-box",
+      "sku": "BB-UNI-SL",
+      "name": "Universal Slim Sealed Box",
+      "category": "universal",
+      "price": 149,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": true,
+      "universal": true,
+      "enclosureType": "sealed",
+      "description": "Universal shallow-mount sealed box for trucks, SUVs and cars. Works with most shallow subwoofers.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "0.50 cu ft",
+        "Depth": "6 in",
+        "Material": "5/8\" MDF",
+        "Tuning": "Sealed"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          8,
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          }
+        ]
+      },
+      "fitment": [],
+      "createdAt": "2026-01-11T00:00:00.000Z"
+    },
+    {
+      "id": "p_012",
+      "slug": "universal-ported-truck-box",
+      "sku": "BB-UNI-PT",
+      "name": "Universal Ported Truck Box",
+      "category": "ported",
+      "price": 229,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": true,
+      "enclosureType": "ported",
+      "description": "Ported wedge box for regular and extended cab trucks behind-the-seat installs.",
+      "features": [
+        "Precision CNC-cut 5/8\" MDF construction",
+        "Glued, nailed and fully sealed seams",
+        "Automotive-grade carpet wrap",
+        "Gold-plated spring terminal cup",
+        "Bolts in using factory mounting points — no drilling"
+      ],
+      "specs": {
+        "Net volume (per sub)": "1.25 cu ft",
+        "Port tuning": "32 Hz",
+        "Material": "3/4\" MDF"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [
+          10,
+          12
+        ],
+        "configurations": [
+          {
+            "label": "Single",
+            "extra": 0
+          },
+          {
+            "label": "Dual",
+            "extra": 40
+          }
+        ],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": [
+          {
+            "label": "Speaker terminal cup upgrade",
+            "price": 15
+          }
+        ]
+      },
+      "fitment": [],
+      "createdAt": "2026-01-12T00:00:00.000Z"
+    },
+    {
+      "id": "p_013",
+      "slug": "carpeted-amp-rack",
+      "sku": "BB-AMP-RCK",
+      "name": "Carpeted Amp Rack",
+      "category": "accessories",
+      "price": 69,
+      "salePrice": null,
+      "stock": 25,
+      "active": true,
+      "featured": false,
+      "universal": true,
+      "enclosureType": "sealed",
+      "description": "Matching carpeted amplifier rack. Mounts to your enclosure or vehicle floor.",
+      "features": [
+        "Matches enclosure carpet colors",
+        "Pre-drilled wire pass-through",
+        "Hardware included"
+      ],
+      "specs": {
+        "Size": "16 x 11 in",
+        "Material": "1/2\" MDF"
+      },
+      "image": "",
+      "options": {
+        "subSizes": [],
+        "configurations": [],
+        "colors": [
+          "Black",
+          "Charcoal Grey",
+          "Grey",
+          "Tan"
+        ],
+        "addons": []
+      },
+      "fitment": [],
+      "createdAt": "2026-01-13T00:00:00.000Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rv_1",
+      "productId": "p_001",
+      "name": "Marcus T.",
+      "email": "",
+      "rating": 5,
+      "title": "Perfect fit",
+      "body": "Bolted right in under the seat of my 2021 Silverado. Carpet matches great and two 10s hit hard.",
+      "approved": true,
+      "createdAt": "2026-06-02T10:00:00.000Z"
+    },
+    {
+      "id": "rv_2",
+      "productId": "p_003",
+      "name": "Jenna R.",
+      "email": "",
+      "rating": 5,
+      "title": "Clean install",
+      "body": "Rear seat still folds up. Couldn't even tell there's a box under there until the bass hits.",
+      "approved": true,
+      "createdAt": "2026-07-12T10:00:00.000Z"
+    },
+    {
+      "id": "rv_3",
+      "productId": "p_007",
+      "name": "Luis G.",
+      "email": "",
+      "rating": 4,
+      "title": "Great box",
+      "body": "Solid build quality. Shipping took a week but it was worth the wait.",
+      "approved": true,
+      "createdAt": "2026-08-21T10:00:00.000Z"
+    },
+    {
+      "id": "rv_4",
+      "productId": "p_005",
+      "name": "Derek P.",
+      "email": "",
+      "rating": 5,
+      "title": "Ram owners get this",
+      "body": "Fits my 2022 Ram perfectly. Great customer service when I had questions.",
+      "approved": true,
+      "createdAt": "2026-09-05T10:00:00.000Z"
+    }
+  ],
+  "coupons": [
+    {
+      "code": "BASS10",
+      "type": "percent",
+      "value": 10,
+      "minSubtotal": 0,
+      "usageLimit": 0,
+      "expires": null,
+      "active": true,
+      "used": 0
+    },
+    {
+      "code": "SAVE25",
+      "type": "fixed",
+      "value": 25,
+      "minSubtotal": 250,
+      "usageLimit": 0,
+      "expires": null,
+      "active": true,
+      "used": 0
+    }
+  ],
+  "orders": [],
+  "subscribers": [],
+  "messages": []
+}

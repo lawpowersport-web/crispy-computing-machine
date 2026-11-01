@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | BassBox Enclosures</title>
+  <meta name="description" content="Questions about fitment, orders or custom boxes? Contact BassBox Enclosures.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <section class="page-head"><div class="container"><div class="breadcrumb"><a href="/">Home</a> / Contact Us</div><h1 style="font-size:2.2rem;margin:0">Contact Us</h1></div></section>
+
+  <main class="section"><div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px">
+    <div><h2>We're here to help</h2><p class="muted">Questions about fitment, an existing order, or which subwoofer to pair with your box? Send us a message.</p><div id="store-info"></div></div>
+    <form id="contact-form" class="checkout-section">
+      <input type="hidden" name="type" value="contact">
+      <div class="form-grid">
+        <div><label for="name">Name *</label><input id="name" name="name" required></div>
+        <div><label for="email">Email *</label><input id="email" name="email" type="email" required></div>
+        <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel"></div>
+        <div><label for="vehicle">Vehicle</label><input id="vehicle" name="vehicle" placeholder="Year Make Model"></div>
+        <div class="full"><label for="message">Message *</label><textarea id="message" name="message" required></textarea></div>
+      </div>
+      <button class="btn" style="margin-top:14px">Send message</button><div id="msg"></div>
+    </form>
+  </div></main>
+
+  <div id="site-footer"></div>
+  <script src="/js/app.js"></script>
+  <script>
+    App.ready.then((App) => {
+      const { $, esc, api } = App;
+      const form = $('#contact-form');
+      const v = App.vehicle.get(); if (v && form.vehicle) form.vehicle.value = App.vehicle.label(v);
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const body = Object.fromEntries(new FormData(form));
+        try { const r = await api('/api/contact', { method: 'POST', body }); $('#msg').innerHTML = `<div class="alert alert-success">${esc(r.message)}</div>`; form.reset(); }
+        catch (err) { $('#msg').innerHTML = `<div class="alert alert-error">${esc(err.message)}</div>`; }
+      });
+      const s = App.config.store;
+      const info = $('#store-info');
+      if (info) info.innerHTML = `<p>📞 <a href="tel:${esc(s.phone)}">${esc(s.phone)}</a></p><p>✉️ <a href="mailto:${esc(s.email)}">${esc(s.email)}</a></p><p>📍 ${esc(s.address)}</p><p>🕘 ${esc(s.hours || '')}</p>`;
+    });
+  </script>
+</body>
+</html>

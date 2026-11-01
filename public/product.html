@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product | BassBox Enclosures</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <div class="breadcrumb" style="color:var(--muted);margin-top:24px" id="crumb"></div>
+    <div id="pdp-root"><div class="empty" style="margin:40px 0">Loading…</div></div>
+
+    <div id="pdp-tabs" class="hidden">
+      <div class="tabs" role="tablist">
+        <button class="on" data-tab="desc">Description</button>
+        <button data-tab="specs">Specs</button>
+        <button data-tab="fit">Vehicle Fitment</button>
+        <button data-tab="reviews" id="tab-reviews-btn">Reviews</button>
+        <button data-tab="ship">Shipping & Returns</button>
+      </div>
+      <div class="tab-panel" data-panel="desc"></div>
+      <div class="tab-panel hidden" data-panel="specs"></div>
+      <div class="tab-panel hidden" data-panel="fit"></div>
+      <div class="tab-panel hidden" data-panel="reviews"></div>
+      <div class="tab-panel hidden" data-panel="ship">
+        <p><strong>Build time:</strong> every enclosure is built to order in 3–5 business days.</p>
+        <p><strong>Shipping:</strong> flat-rate ground shipping in the continental US, free over the free-shipping threshold. You will receive a tracking number by email.</p>
+        <p><strong>Returns:</strong> unused, uninstalled boxes can be returned within 30 days of delivery. Custom builds are final sale.</p>
+        <p><strong>Warranty:</strong> lifetime warranty against seam and joint failure.</p>
+      </div>
+    </div>
+
+    <section class="section" id="related-wrap"><h2>You may also like</h2><div class="product-grid" id="related"></div></section>
+    <section class="section hidden" id="recent-wrap" style="padding-top:0"><h2>Recently viewed</h2><div class="product-grid" id="recent"></div></section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    App.ready.then(async (App) => {
+      const { $, $$, esc, api, store } = App;
+      const slug = new URLSearchParams(location.search).get('p');
+      let data;
+      try { data = await api('/api/products/' + encodeURIComponent(slug || '')); }
+      catch { $('#pdp-root').innerHTML = `<div class="empty" style="margin:40px 0"><h2>Product not found</h2><a class="btn" href="/shop.html">Back to shop</a></div>`; $('#related-wrap').remove(); return; }
+      const { product: p, reviews, related } = data;
+      const o = p.options || {};
+      const base = p.salePrice && p.salePrice < p.price ? p.salePrice : p.price;
+      const COLORS = { 'black': '#1d1d1f', 'charcoal grey': '#3c4048', 'grey': '#6b6f76', 'gray': '#6b6f76', 'tan': '#b69a74', 'beige': '#c9b08a', 'blue': '#1e3a8a', 'red': '#991b1b' };
+      const cat = App.config.categories.find((c) => c.id === p.category);
+
+      document.title = `${p.name} | ${App.config.store.name}`;
+      document.querySelector('meta[name=description]').content = p.description.slice(0, 155);
+      $('#crumb').innerHTML = `<a href="/">Home</a> / <a href="/shop.html?category=${p.category}">${esc(cat?.name || 'Shop')}</a> / ${esc(p.name)}`;
+
+      // SEO structured data (plugin: seo-schema)
+      if (App.on('seo-schema')) {
+        const ld = { '@context': 'https://schema.org', '@type': 'Product', name: p.name, sku: p.sku, description: p.description, image: location.origin + App.img(p),
+          brand: { '@type': 'Brand', name: App.config.store.name },
+          offers: { '@type': 'Offer', priceCurrency: App.config.store.currency, price: base, availability: p.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock', url: location.href } };
+        if (p.reviewCount) ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: p.rating, reviewCount: p.reviewCount };
+        const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+      }
+
+      const sel = { subSize: o.subSizes?.[0], configuration: o.configurations?.[0]?.label, color: o.colors?.[0], addons: [] };
+      const vehicle = App.vehicle.get();
+      const fitsMine = vehicle && (p.universal || (p.fitment || []).some((f) => f.make === vehicle.make && f.model === vehicle.model && vehicle.year >= f.yearFrom && vehicle.year <= f.yearTo));
+      const swatchGroup = (key, values, label, fmt = (v) => esc(v)) => values?.length ? `
+        <div class="option-block"><label>${label}: <span data-show="${key}"></span></label><div class="swatches">
+        ${values.map((v) => `<button type="button" class="swatch" data-opt="${key}" data-val="${esc(v)}">${fmt(v)}</button>`).join('')}</div></div>` : '';
+
+      $('#pdp-root').innerHTML = `<div class="pdp">
+        <div>
+          <div class="gallery-main"><img id="main-img" src="${esc(App.img(p))}" alt="${esc(p.name)}"></div>
+          <div class="gallery-thumbs"><button class="on"><img src="${esc(App.img(p))}" alt=""></button></div>
+        </div>
+        <div>
+          <span class="eyebrow">${esc(cat?.name || '')} • ${esc(p.enclosureType)}</span>
+          <h1>${esc(p.name)}</h1>
+          ${App.on('reviews') ? `<a href="#pdp-tabs" id="rating-link">${App.stars(p.rating, p.reviewCount)}</a>` : ''}
+          <div class="price" id="price"></div>
+          ${App.on('financing') ? `<div class="paylater" id="paylater"></div>` : ''}
+          <p class="muted" style="margin-top:6px">SKU: ${esc(p.sku || '—')} • ${p.stock > 5 ? '<span style="color:var(--success)">In stock</span>' : p.stock > 0 ? `<span style="color:var(--warn)">Only ${p.stock} left</span>` : '<span style="color:var(--accent)">Out of stock</span>'}</p>
+          ${vehicle && App.on('fitment-finder') ? `<div class="alert ${fitsMine ? 'alert-success' : 'alert-error'}">${fitsMine ? '✔ Fits' : '✖ Does not fit'} your ${esc(App.vehicle.label(vehicle))}</div>` : ''}
+          ${swatchGroup('subSize', o.subSizes, 'Subwoofer size', (v) => v + '"')}
+          ${swatchGroup('configuration', o.configurations?.map((c) => c.label), 'Configuration', (v) => { const c = o.configurations.find((x) => x.label === v); return esc(v) + (c.extra ? ` (+${App.money(c.extra)})` : ''); })}
+          ${swatchGroup('color', o.colors, 'Carpet color', (v) => `<i style="background:${COLORS[v.toLowerCase()] || '#ccc'}"></i>${esc(v)}`)}
+          ${o.addons?.length ? `<div class="option-block"><label>Add-ons</label>${o.addons.map((a) => `<label class="addon"><input type="checkbox" data-addon="${esc(a.label)}"> ${esc(a.label)} <span class="muted">(+${App.money(a.price)})</span></label>`).join('')}</div>` : ''}
+          <div class="buy-row">
+            <div class="qty"><button type="button" id="q-minus" aria-label="Decrease">−</button><input id="qty" type="number" min="1" max="20" value="1" aria-label="Quantity"><button type="button" id="q-plus" aria-label="Increase">+</button></div>
+            <button class="btn" id="add-btn" ${p.stock <= 0 ? 'disabled' : ''}>${p.stock > 0 ? 'Add to cart' : 'Sold out'}</button>
+            ${App.on('wishlist') ? `<button class="btn btn-outline wish-inline" data-wish="${esc(p.id)}" aria-label="Wishlist" style="flex:0 0 56px;padding:0">${App.wishlist.has(p.id) ? '♥' : '♡'}</button>` : ''}
+          </div>
+          <button class="btn btn-dark btn-block" id="buy-now" ${p.stock <= 0 ? 'disabled' : ''}>Buy it now</button>
+          <div class="trust-row"><div>🚚<br>Free ship over ${App.money(App.config.store.freeShippingOver)}</div><div>🛡️<br>Lifetime seam warranty</div><div>🔒<br>Secure checkout</div></div>
+        </div>
+      </div>`;
+
+      const price = () => base + (o.configurations?.find((c) => c.label === sel.configuration)?.extra || 0) + (o.addons || []).filter((a) => sel.addons.includes(a.label)).reduce((s, a) => s + a.price, 0);
+      const renderSel = () => {
+        $$('[data-opt]').forEach((b) => b.classList.toggle('on', String(sel[b.dataset.opt]) === b.dataset.val));
+        $$('[data-show]').forEach((s) => (s.textContent = s.dataset.show === 'subSize' ? sel.subSize + '"' : sel[s.dataset.show]));
+        const pr = price();
+        $('#price').innerHTML = p.salePrice && p.salePrice < p.price ? `<span class="sale">${App.money(pr)}</span><del>${App.money(pr - base + p.price)}</del>` : App.money(pr);
+        if ($('#paylater')) { const n = App.pcfg('financing').installments || 4; $('#paylater').innerHTML = `or ${n} interest-free payments of <strong>${App.money(pr / n)}</strong> at checkout`; }
+      };
+      $$('[data-opt]').forEach((b) => (b.onclick = () => { sel[b.dataset.opt] = b.dataset.opt === 'subSize' ? +b.dataset.val : b.dataset.val; renderSel(); }));
+      $$('[data-addon]').forEach((c) => (c.onchange = () => { sel.addons = $$('[data-addon]:checked').map((x) => x.dataset.addon); renderSel(); }));
+      renderSel();
+      const qty = $('#qty');
+      $('#q-minus').onclick = () => (qty.value = Math.max(1, +qty.value - 1));
+      $('#q-plus').onclick = () => (qty.value = Math.min(20, +qty.value + 1));
+      const addToCart = () => {
+        const opts = {};
+        if (o.subSizes?.length) opts.subSize = sel.subSize;
+        if (o.configurations?.length) opts.configuration = sel.configuration;
+        if (o.colors?.length) opts.color = sel.color;
+        if (sel.addons.length) opts.addons = sel.addons;
+        App.cart.add(p, opts, Math.max(1, Math.min(20, +qty.value || 1)), price());
+        App.track('AddToCart', { value: price(), currency: App.config.store.currency });
+      };
+      $('#add-btn').onclick = () => { addToCart(); App.openCart(); };
+      $('#buy-now').onclick = () => { addToCart(); location.href = '/checkout.html'; };
+
+      // Tabs
+      $('#pdp-tabs').classList.remove('hidden');
+      $$('.tabs button').forEach((b) => (b.onclick = () => {
+        $$('.tabs button').forEach((x) => x.classList.toggle('on', x === b));
+        $$('.tab-panel').forEach((x) => x.classList.toggle('hidden', x.dataset.panel !== b.dataset.tab));
+      }));
+      $('[data-panel=desc]').innerHTML = `<p>${esc(p.description)}</p>${p.features?.length ? `<h3>Features</h3><ul>${p.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}`;
+      $('[data-panel=specs]').innerHTML = `<table class="spec-table">${Object.entries({ 'Enclosure type': p.enclosureType, 'Subwoofer sizes': (o.subSizes || []).map((s) => s + '"').join(', '), 'Carpet colors': (o.colors || []).join(', '), ...p.specs }).filter(([, v]) => v).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}</table>`;
+      $('[data-panel=fit]').innerHTML = p.universal ? '<p>Universal fit — works in most trucks, SUVs and cars. Check the dimensions in the Specs tab.</p>'
+        : `<table class="spec-table"><tr><td>Make / Model</td><td><strong>Years • Cab</strong></td></tr>${p.fitment.map((f) => `<tr><td>${esc(f.make)} ${esc(f.model)}</td><td>${f.yearFrom}–${f.yearTo} • ${esc(f.cab)}</td></tr>`).join('')}</table>`;
+
+      // Reviews (plugin)
+      if (!App.on('reviews')) { $('#tab-reviews-btn').remove(); }
+      else {
+        $('[data-panel=reviews]').innerHTML = `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="rv-layout">
+            <div><h3>${p.reviewCount ? `${p.rating} out of 5 • ${p.reviewCount} review${p.reviewCount > 1 ? 's' : ''}` : 'No reviews yet'}</h3>
+              ${reviews.map((r) => `<div class="review-item">${App.stars(r.rating)} <strong>${esc(r.title)}</strong><p style="margin:6px 0">${esc(r.body)}</p><small class="muted">${esc(r.name)} • ${new Date(r.createdAt).toLocaleDateString()}</small></div>`).join('')}</div>
+            <form id="review-form"><h3>Write a review</h3>
+              <div class="rating-input">${[5, 4, 3, 2, 1].map((n) => `<input type="radio" name="rating" id="r${n}" value="${n}" ${n === 5 ? 'checked' : ''}><label for="r${n}">★</label>`).join('')}</div>
+              <div class="form-grid" style="margin-top:10px"><input name="name" placeholder="Your name" required><input name="email" type="email" placeholder="Email (not shown)">
+              <input class="full" name="title" placeholder="Review title"><textarea class="full" name="body" placeholder="How does it fit and sound?" required></textarea></div>
+              <button class="btn" style="margin-top:12px">Submit review</button><div id="review-msg"></div></form>
+          </div>`;
+        if (innerWidth < 820) $('.rv-layout').style.gridTemplateColumns = '1fr';
+        $('#review-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const f = e.target;
+          try {
+            const r = await api('/api/reviews', { method: 'POST', body: { productId: p.id, rating: +f.rating.value, name: f.name.value, email: f.email.value, title: f.title.value, body: f.body.value } });
+            $('#review-msg').innerHTML = `<div class="alert alert-success">${esc(r.message)}</div>`; f.reset();
+          } catch (err) { $('#review-msg').innerHTML = `<div class="alert alert-error">${esc(err.message)}</div>`; }
+        });
+        $('#rating-link')?.addEventListener('click', () => $('#tab-reviews-btn').click());
+      }
+
+      // Related
+      if (related.length) $('#related').innerHTML = related.map(App.productCard).join(''); else $('#related-wrap').remove();
+
+      // Recently viewed (plugin)
+      if (App.on('recently-viewed')) {
+        const recent = store.get('bb_recent', []).filter((s) => s !== p.slug);
+        store.set('bb_recent', [p.slug, ...recent].slice(0, 8));
+        if (recent.length) {
+          const all = await api('/api/products');
+          const items = recent.map((s) => all.find((x) => x.slug === s)).filter(Boolean).slice(0, 4);
+          if (items.length) { $('#recent').innerHTML = items.map(App.productCard).join(''); $('#recent-wrap').classList.remove('hidden'); }
+        }
+      }
+      App.track('ViewContent', { content_ids: [p.sku], value: base, currency: App.config.store.currency });
+    });
+  </script>
+</body>
+</html>

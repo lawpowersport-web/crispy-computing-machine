@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | BassBox Enclosures</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <section class="page-head"><div class="container"><div class="breadcrumb"><a href="/">Home</a> / <a href="/cart.html">Cart</a> / Checkout</div><h1 style="font-size:2.2rem;margin:0">Checkout</h1></div></section>
+
+  <main class="container">
+    <form class="cart-layout" id="checkout" novalidate>
+      <div>
+        <div class="checkout-section">
+          <h3>1. Contact information</h3>
+          <div class="form-grid">
+            <div><label for="email">Email *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+            <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+            <label class="addon full"><input type="checkbox" name="subscribe" checked> Email me deals and new vehicle fitments</label>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h3>2. Shipping address</h3>
+          <div class="form-grid">
+            <div><label for="firstName">First name *</label><input id="firstName" name="firstName" required autocomplete="given-name"></div>
+            <div><label for="lastName">Last name *</label><input id="lastName" name="lastName" required autocomplete="family-name"></div>
+            <div class="full"><label for="address">Address *</label><input id="address" name="address" required autocomplete="address-line1"></div>
+            <div class="full"><label for="address2">Apartment, suite, etc.</label><input id="address2" name="address2" autocomplete="address-line2"></div>
+            <div><label for="city">City *</label><input id="city" name="city" required autocomplete="address-level2"></div>
+            <div><label for="state">State *</label><input id="state" name="state" required autocomplete="address-level1" placeholder="e.g. TX"></div>
+            <div><label for="zip">ZIP code *</label><input id="zip" name="zip" required autocomplete="postal-code"></div>
+            <div><label for="country">Country</label><select id="country" name="country"><option value="US">United States</option><option value="CA">Canada</option></select></div>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h3>3. Vehicle & notes</h3>
+          <div class="form-grid">
+            <div class="full"><label for="vehicle">Your vehicle (year, make, model, cab)</label><input id="vehicle" name="vehicle" placeholder="2021 Chevrolet Silverado 1500 Crew Cab"></div>
+            <div class="full"><label for="notes">Order notes</label><textarea id="notes" name="notes" style="min-height:80px" placeholder="Subwoofer model, special requests…"></textarea></div>
+          </div>
+        </div>
+        <div class="checkout-section">
+          <h3>4. Payment</h3>
+          <label class="pay-option"><input type="radio" name="paymentMethod" value="card" checked> 💳 Credit / Debit card</label>
+          <div id="card-fields" class="form-grid" style="margin:0 0 14px">
+            <div class="full"><input placeholder="Card number" inputmode="numeric" autocomplete="cc-number" aria-label="Card number"></div>
+            <div><input placeholder="MM / YY" autocomplete="cc-exp" aria-label="Expiry"></div>
+            <div><input placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" aria-label="CVC"></div>
+            <p class="full muted" style="font-size:.8rem;margin:0">Demo form: connect a payment gateway (Stripe, Square, PayPal) before going live. Card details are never sent to this server.</p>
+          </div>
+          <label class="pay-option"><input type="radio" name="paymentMethod" value="paypal"> 🅿️ PayPal</label>
+          <label class="pay-option"><input type="radio" name="paymentMethod" value="bank"> 🏦 Bank transfer</label>
+          <label class="pay-option"><input type="radio" name="paymentMethod" value="cod"> 💵 Pay on pickup</label>
+        </div>
+        <div id="err"></div>
+      </div>
+
+      <aside class="summary">
+        <h3>Your order</h3>
+        <div id="lines"></div>
+        <div id="coupon-wrap"></div>
+        <div id="totals"></div>
+        <button class="btn btn-block" id="place" style="margin-top:14px">Place order</button>
+        <p class="muted center" style="font-size:.8rem;margin-top:10px">By placing your order you agree to our terms and return policy.</p>
+      </aside>
+    </form>
+    <div id="done" class="hidden" style="padding:60px 0"></div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/js/app.js"></script>
+  <script>
+    App.ready.then((App) => {
+      const { $, $$, esc, api, store } = App;
+      const form = $('#checkout');
+      if (!App.cart.items().length) { form.innerHTML = `<div class="empty" style="grid-column:1/-1"><h2>Your cart is empty</h2><a class="btn" href="/shop.html">Shop now</a></div>`; return; }
+      const v = App.vehicle.get(); if (v) form.vehicle.value = App.vehicle.label(v);
+
+      $('#lines').innerHTML = App.cart.items().map((i) => `<div class="mini-line"><img src="${esc(i.image)}" alt=""><div class="grow"><strong>${esc(i.name)}</strong><div class="muted" style="font-size:.78rem">${esc(App.optionText(i.options))}</div></div><span>${i.qty} × ${App.money(i.unitPrice)}</span></div>`).join('');
+      if (App.on('coupons')) {
+        $('#coupon-wrap').innerHTML = `<div class="coupon-row"><input id="coupon" placeholder="Coupon code" aria-label="Coupon" value="${esc(store.get('bb_coupon', ''))}"><button type="button" class="btn btn-dark btn-sm" id="apply">Apply</button></div>`;
+        $('#apply').onclick = () => { store.set('bb_coupon', $('#coupon').value.trim()); refresh(); };
+      }
+      const coupon = () => (App.on('coupons') ? store.get('bb_coupon', '') : '');
+
+      let quote = null;
+      async function refresh() {
+        try {
+          quote = await api('/api/cart/quote', { method: 'POST', body: { items: App.cart.payload(), coupon: coupon(), state: form.state.value } });
+          $('#err').innerHTML = '';
+        } catch (e) {
+          $('#err').innerHTML = `<div class="alert alert-error">${esc(e.message)}</div>`;
+          if (coupon()) { store.set('bb_coupon', ''); if ($('#coupon')) $('#coupon').value = ''; return refresh(); }
+          quote = null;
+        }
+        $('#totals').innerHTML = quote ? `
+          <div class="summary-row"><span>Subtotal</span><span>${App.money(quote.subtotal)}</span></div>
+          ${quote.discount ? `<div class="summary-row" style="color:var(--success)"><span>Discount (${esc(quote.coupon)})</span><span>−${App.money(quote.discount)}</span></div>` : ''}
+          <div class="summary-row"><span>Shipping</span><span>${quote.shipping ? App.money(quote.shipping) : 'FREE'}</span></div>
+          <div class="summary-row"><span>Tax</span><span>${App.money(quote.tax)}</span></div>
+          <div class="summary-row total"><span>Total</span><span>${App.money(quote.total)}</span></div>` : '';
+        $('#place').disabled = !quote;
+      }
+      form.state.addEventListener('change', refresh);
+      refresh();
+
+      $$('[name=paymentMethod]').forEach((r) => (r.onchange = () => $('#card-fields').classList.toggle('hidden', form.paymentMethod.value !== 'card')));
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const missing = $$('[required]', form).filter((i) => !i.value.trim());
+        $$('[required]', form).forEach((i) => (i.style.borderColor = i.value.trim() ? '' : 'var(--accent)'));
+        if (missing.length) { $('#err').innerHTML = `<div class="alert alert-error">Please fill in all required fields.</div>`; missing[0].focus(); return; }
+        const btn = $('#place'); btn.disabled = true; btn.textContent = 'Placing order…';
+        const f = Object.fromEntries(new FormData(form));
+        try {
+          const r = await api('/api/orders', { method: 'POST', body: {
+            customer: { email: f.email, phone: f.phone, firstName: f.firstName, lastName: f.lastName, address: f.address, address2: f.address2, city: f.city, state: f.state, zip: f.zip, country: f.country, vehicle: f.vehicle, notes: f.notes },
+            items: App.cart.payload(), coupon: coupon(), paymentMethod: f.paymentMethod, subscribe: !!f.subscribe } });
+          App.track('Purchase', { value: r.total, currency: App.config.store.currency });
+          App.cart.clear(); store.set('bb_coupon', '');
+          form.remove();
+          $('#done').classList.remove('hidden');
+          $('#done').innerHTML = `<div class="center" style="max-width:600px;margin:auto"><div style="font-size:3.5rem">✅</div><h1 style="font-size:2rem">Thank you for your order!</h1>
+            <p>Your order number is <strong>${esc(r.orderId)}</strong>. A confirmation will be sent to <strong>${esc(f.email)}</strong>.</p>
+            ${f.paymentMethod === 'bank' ? `<div class="alert alert-success">Please transfer ${App.money(r.total)} and use ${esc(r.orderId)} as the reference. We start building as soon as payment clears.</div>` : ''}
+            <p class="muted">Your enclosure will be built in 3–5 business days. You can check progress any time.</p>
+            <a class="btn" href="/track.html?id=${encodeURIComponent(r.orderId)}&email=${encodeURIComponent(f.email)}">Track your order</a> <a class="btn btn-outline" href="/shop.html">Keep shopping</a></div>`;
+          scrollTo({ top: 0 });
+        } catch (err) {
+          $('#err').innerHTML = `<div class="alert alert-error">${esc(err.message)}</div>`;
+          btn.disabled = false; btn.textContent = 'Place order';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | BassBox Enclosures</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login-wrap" id="login-view">
+    <form class="login-card" id="login-form">
+      <h1>🔊 Store Admin</h1>
+      <p class="muted">Sign in to manage your store.</p>
+      <label for="u">Username</label><input id="u" name="username" autocomplete="username" required>
+      <label for="pw" style="margin-top:12px">Password</label><input id="pw" name="password" type="password" autocomplete="current-password" required>
+      <button class="btn" style="width:100%;justify-content:center;margin-top:18px;padding:12px">Sign in</button>
+      <p id="login-err" style="color:#b91c1c"></p>
+      <p class="muted" style="font-size:.8rem">← <a href="/">Back to store</a></p>
+    </form>
+  </div>
+
+  <!-- APP -->
+  <div class="layout hidden" id="app-view">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span>🔊</span> BassBox Admin</div>
+      <nav class="nav" id="nav">
+        <a href="#dashboard" data-v="dashboard">📊 Dashboard</a>
+        <a href="#orders" data-v="orders">🧾 Orders <span class="count" id="c-orders"></span></a>
+        <a href="#products" data-v="products">📦 Products</a>
+        <a href="#reviews" data-v="reviews">⭐ Reviews <span class="count" id="c-reviews"></span></a>
+        <a href="#coupons" data-v="coupons">🏷️ Coupons</a>
+        <a href="#messages" data-v="messages">✉️ Messages <span class="count" id="c-messages"></span></a>
+        <a href="#subscribers" data-v="subscribers">📧 Subscribers</a>
+        <div class="nav-sep">Configuration</div>
+        <a href="#plugins" data-v="plugins">🧩 Plugins</a>
+        <a href="#seo" data-v="seo">🔎 SEO & Feeds</a>
+        <a href="#settings" data-v="settings">⚙️ Settings</a>
+        <div class="nav-sep">Account</div>
+        <a href="/" target="_blank">🛒 View store ↗</a>
+        <a href="#" id="logout">🚪 Log out</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="topline">
+        <div style="display:flex;gap:10px;align-items:center"><button class="btn btn-ghost menu-btn" id="menu-btn">☰</button><h1 id="view-title">Dashboard</h1></div>
+        <div id="view-actions"></div>
+      </div>
+      <div id="view"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BassBox Enclosures | Vehicle-Specific Underseat Subwoofer Boxes</title>
+  <meta name="description" content="Custom-fit underseat subwoofer enclosures for Silverado, Sierra, F-150, Ram, Tacoma, Tundra and more. Built to order, ships fast.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <span class="eyebrow">Built for your exact truck</span>
+          <h1>Underseat subwoofer boxes that bolt right in.</h1>
+          <p class="lead">Vehicle-specific enclosures, CNC-cut and wrapped in automotive carpet. Big bass with zero lost cargo space.</p>
+          <div class="hero-cta">
+            <a href="/shop.html?category=underseat" class="btn">Shop Underseat Boxes</a>
+            <a href="/custom.html" class="btn btn-outline">Request a Custom Box</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>40+</strong><span>Vehicle fitments</span></div>
+            <div><strong>3–5 day</strong><span>Build time</span></div>
+            <div><strong>Lifetime</strong><span>Seam warranty</span></div>
+          </div>
+        </div>
+        <div class="hero-img"><img src="/img/product/chevy-silverado-gmc-sierra-crew-cab-underseat-box-2019-2026.svg" alt="Underseat subwoofer enclosure"></div>
+      </div>
+    </section>
+
+    <!-- FITMENT FINDER (plugin: fitment-finder) -->
+    <div class="container" id="finder-wrap">
+      <form class="finder" id="finder">
+        <h3>🚙 Find a box for your vehicle</h3>
+        <div class="finder-row">
+          <select name="year" aria-label="Year"></select>
+          <select name="make" aria-label="Make"></select>
+          <select name="model" aria-label="Model"></select>
+          <select name="sub" aria-label="Subwoofer size"><option value="">Sub size (any)</option><option value="8">8"</option><option value="10">10"</option><option value="12">12"</option></select>
+          <button class="btn">Find My Box</button>
+        </div>
+        <div class="finder-current" id="finder-current"></div>
+      </form>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Shop by category</span><h2>Find the right enclosure</h2></div></div>
+        <div class="cat-grid" id="cat-grid"></div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Best sellers</span><h2>Featured underseat boxes</h2></div><a href="/shop.html" class="btn btn-outline btn-sm">View all</a></div>
+        <div class="product-grid" id="featured"></div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Why BassBox</span><h2>Built different. Built to fit.</h2></div></div>
+        <div class="feature-grid">
+          <div class="feature"><div class="ico">📐</div><h3>Exact-fit design</h3><p>Every box is modeled from the actual cab so it uses factory mounting points.</p></div>
+          <div class="feature"><div class="ico">🪵</div><h3>Premium MDF</h3><p>CNC-cut 5/8" MDF, glued, nailed and sealed for zero air leaks.</p></div>
+          <div class="feature"><div class="ico">🎨</div><h3>Carpet to match</h3><p>Choose black, charcoal, grey or tan carpet to match your interior.</p></div>
+          <div class="feature"><div class="ico">🚚</div><h3>Fast shipping</h3><p>Built to order in 3–5 business days. Free shipping over $500.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">How it works</span><h2>Three steps to better bass</h2></div></div>
+        <div class="steps">
+          <div class="step"><h3>Select your vehicle</h3><p class="muted">Pick your year, make and model to see every box that fits your cab.</p></div>
+          <div class="step"><h3>Configure your box</h3><p class="muted">Choose subwoofer size, single or dual, carpet color and add-ons.</p></div>
+          <div class="step"><h3>Bolt in & enjoy</h3><p class="muted">We build and ship it. Install takes under an hour with basic tools.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS (plugin: reviews) -->
+    <section class="section section-alt" id="reviews-section">
+      <div class="container">
+        <div class="section-head"><div><span class="eyebrow">Customer reviews</span><h2>What truck owners say</h2></div></div>
+        <div class="review-grid" id="review-grid"></div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="news-band">
+      <div class="container">
+        <div><h2 style="margin:0">Get deals & new fitments first</h2><p style="margin:0">Join the list — no spam, ever.</p></div>
+        <form id="news-band"><input type="email" name="email" placeholder="Your email address" required aria-label="Email"><button class="btn btn-dark">Subscribe</button></form>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/js/app.js"></script>
+  <script>
+    App.ready.then(async (App) => {
+      const { $, esc, api } = App;
+
+      // Fitment finder
+      if (App.on('fitment-finder')) {
+        const f = $('#finder');
+        App.mountFinder(f, (v) => {
+          const sub = f.sub.value;
+          location.href = `/shop.html?year=${v.year}&make=${encodeURIComponent(v.make)}&model=${encodeURIComponent(v.model)}${sub ? '&sub=' + sub : ''}`;
+        });
+        const v = App.vehicle.get();
+        if (v) $('#finder-current').innerHTML = `Your vehicle: <strong>${esc(App.vehicle.label(v))}</strong>`;
+      } else $('#finder-wrap').remove();
+
+      // Categories
+      const catIcons = { underseat: 'chevy-silverado-gmc-sierra-crew-cab-underseat-box-2019-2026', universal: 'universal-slim-sealed-box', ported: 'universal-ported-truck-box', accessories: 'carpeted-amp-rack' };
+      $('#cat-grid').innerHTML = App.config.categories.map((c) => `
+        <a class="cat-card" href="/shop.html?category=${c.id}" style="--img:url('/img/product/${catIcons[c.id] || ''}.svg')">
+          <div><h3>${esc(c.name)}</h3><p>${esc(c.description)}</p></div></a>`).join('');
+
+      // Featured
+      const featured = await api('/api/products?featured=1');
+      $('#featured').innerHTML = featured.slice(0, 8).map(App.productCard).join('');
+
+      // Reviews
+      const reviews = App.on('reviews') ? await api('/api/reviews/featured') : [];
+      if (!reviews.length) $('#reviews-section').remove();
+      else $('#review-grid').innerHTML = reviews.slice(0, 3).map((r) => `
+        <div class="review-card">${App.stars(r.rating)}<h4 style="margin:8px 0">${esc(r.title)}</h4><p class="muted">“${esc(r.body)}”</p>
+        <div class="who">${esc(r.name)} <span>Verified buyer • ${esc(r.product || '')}</span></div></div>`).join('');
+
+      App.bindNewsletter($('#news-band'), 'home');
+    });
+  </script>
+</body>
+</html>
